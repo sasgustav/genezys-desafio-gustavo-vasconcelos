@@ -24,7 +24,9 @@ const NavBar: React.FC = () => {
           <Link href="/" className="text-white text-2xl font-bold">
             Gustavo Vasconcelos
           </Link>
-          <p className="text-white font-light text-sm">Teste Frontend - Genezys App</p>
+          <p className="text-white font-light text-sm">
+            Teste Frontend - Genezys App
+          </p>
         </div>
         <ul className="hidden md:flex space-x-8 items-center">
           <NavItem href="/" label="Home" icon={<FaHome />} />
