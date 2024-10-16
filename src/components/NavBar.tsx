@@ -2,24 +2,50 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import {
+  FaHome,
+  FaUserPlus,
+  FaSignInAlt,
+  FaKey,
+  FaSignOutAlt,
+} from "react-icons/fa";
+import { useAuth } from "@/context/AuthContext";
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { logout, isAuthenticated } = useAuth();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <nav className="bg-gradient-to-r from-blue-800 via-blue-600 to-blue-500 p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white text-2xl font-bold">
-          <Link href="/">Gustavo Vasconcelos</Link>
-          <p className="text-white font-normal ">Teste Frontend</p>
+        <div>
+          <Link href="/" className="text-white text-2xl font-bold">
+            Gustavo Vasconcelos
+          </Link>
+          <p className="text-white font-light text-sm">Teste Frontend - Genezys App</p>
         </div>
-        <ul className="hidden md:flex space-x-8">
-          <NavItem href="/" label="Home" />
-          <NavItem href="/register" label="Cadastro" />
-          <NavItem href="/login" label="Login" />
-          <NavItem href="/reset-password" label="Recuperar Senha" />
+        <ul className="hidden md:flex space-x-8 items-center">
+          <NavItem href="/" label="Home" icon={<FaHome />} />
+          <NavItem href="/register" label="Cadastro" icon={<FaUserPlus />} />
+          <NavItem href="/login" label="Login" icon={<FaSignInAlt />} />
+          <NavItem
+            href="/reset-password"
+            label="Recuperar Senha"
+            icon={<FaKey />}
+          />
+          {isAuthenticated && (
+            <li>
+              <button
+                onClick={logout}
+                className="text-white hover:text-gray-200 text-lg font-medium flex items-center space-x-2 transition duration-300"
+              >
+                <FaSignOutAlt />
+                <span>Logout</span>
+              </button>
+            </li>
+          )}
         </ul>
         <button
           onClick={toggleMenu}
@@ -48,26 +74,43 @@ const NavBar: React.FC = () => {
         } transition-all duration-300 ease-in-out`}
       >
         <ul className="space-y-4 p-4">
-          <NavItem href="/" label="Home" />
-          <NavItem href="/register" label="Cadastro" />
-          <NavItem href="/login" label="Login" />
-          <NavItem href="/reset-password" label="Recuperar Senha" />
+          <NavItem href="/" label="Home" icon={<FaHome />} />
+          <NavItem href="/register" label="Cadastro" icon={<FaUserPlus />} />
+          <NavItem href="/login" label="Login" icon={<FaSignInAlt />} />
+          <NavItem
+            href="/reset-password"
+            label="Recuperar Senha"
+            icon={<FaKey />}
+          />
+          {isAuthenticated && (
+            <li>
+              <button
+                onClick={logout}
+                className="text-white hover:text-gray-200 text-lg font-medium flex items-center space-x-2 transition duration-300"
+              >
+                <FaSignOutAlt />
+                <span>Logout</span>
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
   );
 };
 
-const NavItem: React.FC<{ href: string; label: string }> = ({
-  href,
-  label,
-}) => (
+const NavItem: React.FC<{
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+}> = ({ href, label, icon }) => (
   <li>
     <Link
       href={href}
-      className="text-white hover:text-gray-200 text-lg font-medium transition duration-300"
+      className="text-white hover:text-gray-200 text-lg font-medium flex items-center space-x-2 transition duration-300"
     >
-      {label}
+      {icon}
+      <span>{label}</span>
     </Link>
   </li>
 );

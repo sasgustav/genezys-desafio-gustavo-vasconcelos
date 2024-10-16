@@ -15,18 +15,20 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
 
+  const isPublicRoute = ["/login", "/register", "/reset-password"].includes(
+    pathname
+  );
+
   return (
     <html lang="pt-BR">
       <head>
         <title>Genezys App - Gustavo Vasconcelos</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body>
+      <body className="flex flex-col min-h-screen">
         <AuthProvider>
-          <Toaster position="top-right" reverseOrder={false} />{" "}
-          {pathname !== "/reset-password" && pathname !== "/login" && pathname !== "/register" && (
-            <NavBar />
-          )}
+          <Toaster position="top-right" reverseOrder={false} />
+          {!isPublicRoute && <NavBar />}
           <main className="flex-grow">{children}</main>
           <Footer />
         </AuthProvider>
