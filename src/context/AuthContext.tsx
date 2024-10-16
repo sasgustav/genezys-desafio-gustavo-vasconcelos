@@ -9,6 +9,8 @@ import React, {
 } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter, usePathname } from "next/navigation";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { auth } from "@/services/firebaseConfig";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
@@ -26,42 +28,54 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
-
-  const publicRoutes = ["/login", "/register", "/reset-password"];
+  const SESSION_KEY = "userAuthenticated";
 
   useEffect(() => {
-    const checkAuth = () => {
-      const loggedIn = !!localStorage.getItem("isAuthenticated");
-      setIsAuthenticated(loggedIn);
-      setLoading(false);
+    const publicRoutes = ["/login", "/register", "/reset-password"];
+    const isUserLoggedIn = sessionStorage.getItem(SESSION_KEY) === "true";
+    setIsAuthenticated(isUserLoggedIn);
+    setLoading(false);
 
-      if (!loggedIn && !publicRoutes.includes(pathname)) {
-        router.push("/login");
-      }
-    };
-    checkAuth();
-  }, [router, pathname]);
+    if (!isUserLoggedIn && !publicRoutes.includes(pathname)) {
+      router.push("/login");
+    }
+  }, [pathname, router]);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     if (
       email === "teste-gustavo-vasconcelos@investimentos.com" &&
       password === "123456"
     ) {
-      localStorage.setItem("isAuthenticated", "true");
+      sessionStorage.setItem(SESSION_KEY, "true");
       setIsAuthenticated(true);
       router.push("/");
       return true;
     } else {
-      toast.error("Credenciais inválidas.");
-      return false;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        sessionStorage.setItem(SESSION_KEY, "true");
+        setIsAuthenticated(true);
+        toast.success("Login realizado com sucesso!");
+        router.push("/");
+        return true;
+      } catch {
+        toast.error("Credenciais inválidas.");
+        return false;
+      }
     }
   };
 
   const logout = () => {
-    localStorage.removeItem("isAuthenticated");
-    setIsAuthenticated(false);
-    toast("Você foi desconectado.", { icon: "👋" });
-    router.push("/login");
+    signOut(auth)
+      .then(() => {
+        sessionStorage.removeItem(SESSION_KEY);
+        setIsAuthenticated(false);
+        toast("Você foi desconectado.", { icon: "👋" });
+        router.push("/login");
+      })
+      .catch(() => {
+        toast.error("Erro ao desconectar.");
+      });
   };
 
   return (

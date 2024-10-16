@@ -14,14 +14,16 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    if (!loading && !isAuthenticated) {
-      router.push("/login");
-    } else if (!loading && isAuthenticated) {
-      setShouldRender(true);
+    if (!loading) {
+      if (isAuthenticated) {
+        setShouldRender(true);
+      } else {
+        router.push("/login");
+      }
     }
   }, [loading, isAuthenticated, router]);
 
-  if (loading || !shouldRender) {
+  if (loading) {
     return (
       <div className="h-screen flex flex-col justify-center items-center bg-gradient-to-r from-blue-500 to-indigo-500">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-white mb-4"></div>
@@ -31,6 +33,8 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
       </div>
     );
   }
+
+  if (!shouldRender) return null;
 
   return <>{children}</>;
 };
