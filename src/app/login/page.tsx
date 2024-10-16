@@ -32,7 +32,7 @@ const Login = () => {
       );
 
       setTimeout(() => {
-        router.push("/dashboard");
+        router.push("/");
       }, 2000);
     } else {
       setError("Usuário ou senha inválidos. Por favor, tente novamente.");
@@ -66,11 +66,18 @@ const Login = () => {
             aria-label="Senha para login"
           />
           {error && <p className="text-red-500 text-sm mt-2">{error}</p>}{" "}
-          {/* Erro exibido */}
           <div className="flex justify-between items-center mt-4">
             <Button label="Entrar" onClick={() => {}} />
           </div>
-          <div className="text-center mt-6">
+          <div className="flex justify-center items-center space-x-4 mt-6">
+            <a
+              href="/register"
+              className="text-sm text-blue-600 hover:text-blue-800 underline"
+              aria-label="Cadastre-se"
+            >
+              Cadastre-se
+            </a>
+            <span className="text-gray-400">|</span>
             <a
               href="/reset-password"
               className="text-sm text-blue-600 hover:text-blue-800 underline"

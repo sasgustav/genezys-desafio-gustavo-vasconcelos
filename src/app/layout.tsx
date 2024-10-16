@@ -24,7 +24,7 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <Toaster position="top-right" reverseOrder={false} />{" "}
-          {pathname !== "/reset-password" && pathname !== "/login" && (
+          {pathname !== "/reset-password" && pathname !== "/login" && pathname !== "/register" && (
             <NavBar />
           )}
           <div>{children}</div>
