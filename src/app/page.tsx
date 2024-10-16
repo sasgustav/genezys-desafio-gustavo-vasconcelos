@@ -57,18 +57,37 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-700 text-white flex items-start justify-center py-10 px-4">
+    <div
+      className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-700 text-white flex items-start justify-center py-10 px-4"
+      aria-labelledby="user-list-title"
+    >
       <div className="max-w-4xl w-full bg-white text-gray-800 shadow-lg rounded-lg p-6 border border-gray-300">
-        <h1 className="text-3xl font-bold text-center mb-6">
+        <h1
+          id="user-list-title"
+          className="text-3xl font-bold text-center mb-6"
+        >
           Lista de Usuários
         </h1>
         <div className="overflow-x-auto">
-          <table className="w-full table-auto border-collapse rounded-lg shadow-md">
+          <table
+            className="w-full table-auto border-collapse rounded-lg shadow-md"
+            aria-describedby="user-list-description"
+          >
+            <caption id="user-list-description" className="sr-only">
+              Esta tabela contém uma lista de usuários com seus nomes, e-mails e
+              endereços.
+            </caption>
             <thead>
               <tr className="bg-blue-600 text-white">
-                <th className="px-6 py-3 text-left">Nome</th>
-                <th className="px-6 py-3 text-left">E-mail</th>
-                <th className="px-6 py-3 text-left">Endereço</th>
+                <th scope="col" className="px-6 py-3 text-left">
+                  Nome
+                </th>
+                <th scope="col" className="px-6 py-3 text-left">
+                  E-mail
+                </th>
+                <th scope="col" className="px-6 py-3 text-left">
+                  Endereço
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -79,9 +98,15 @@ const Home = () => {
                     index % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
                   } hover:bg-blue-100 transition duration-200`}
                 >
-                  <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
-                  <td className="px-6 py-4">{user.address}</td>
+                  <td className="px-6 py-4 whitespace-nowrap" role="cell">
+                    {user.name}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap" role="cell">
+                    {user.email}
+                  </td>
+                  <td className="px-6 py-4" role="cell">
+                    {user.address}
+                  </td>
                 </tr>
               ))}
             </tbody>

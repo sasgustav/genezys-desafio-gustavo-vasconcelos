@@ -13,9 +13,7 @@ const ResetPassword = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
-    toast.success(`Link de recuperação enviado para ${email}`, {
-      icon: "📧",
-    });
+    toast.success(`Link de recuperação enviado para ${email}`, { icon: "📧" });
 
     setTimeout(() => {
       window.location.href = "/login";
@@ -23,11 +21,23 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-900 to-blue-700">
-      <div className="max-w-md w-full bg-white shadow-2xl rounded-lg p-8 border border-gray-200">
+    <div
+      className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-900 to-blue-700"
+      aria-labelledby="reset-password-title"
+    >
+      <div
+        className="max-w-md w-full bg-white shadow-2xl rounded-lg p-8 border border-gray-200"
+        role="form"
+        aria-describedby="reset-password-description"
+      >
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">Recuperar Senha</h1>
-          <p className="text-gray-500 mt-2">
+          <h1
+            id="reset-password-title"
+            className="text-3xl font-bold text-gray-800"
+          >
+            Recuperar Senha
+          </h1>
+          <p id="reset-password-description" className="text-gray-500 mt-2">
             Informe o e-mail associado à sua conta para receber o link de
             recuperação.
           </p>
@@ -39,8 +49,9 @@ const ResetPassword = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              aria-label="E-mail para recuperação de senha"
               placeholder="Digite seu e-mail"
+              aria-required="true"
+              aria-label="E-mail para recuperação de senha"
             />
             <Button
               label="Enviar Link de Recuperação"
@@ -49,7 +60,7 @@ const ResetPassword = () => {
             />
           </Form>
         ) : (
-          <div className="text-center">
+          <div className="text-center" role="status">
             <h2 className="text-xl font-semibold text-green-600">
               Link de recuperação enviado!
             </h2>
@@ -62,7 +73,7 @@ const ResetPassword = () => {
         <div className="text-center mt-6">
           <a
             href="/login"
-            className="text-sm text-blue-600 hover:text-blue-800 underline"
+            className="text-sm text-blue-600 hover:text-blue-800 underline focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
             aria-label="Voltar para o login"
           >
             Voltar para o Login

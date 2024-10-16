@@ -61,12 +61,22 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-700 flex items-center justify-center px-4">
-      <div className="max-w-3xl w-full bg-white shadow-lg rounded-lg p-8 border border-gray-200">
-        <h1 className="text-3xl font-bold text-gray-800 text-center mb-6">
+    <div
+      className="min-h-screen bg-gradient-to-b from-blue-900 to-blue-700 flex items-center justify-center px-4"
+      aria-labelledby="register-title"
+    >
+      <div
+        className="max-w-3xl w-full bg-white shadow-lg rounded-lg p-8 border border-gray-200"
+        role="form"
+        aria-describedby="register-description"
+      >
+        <h1
+          id="register-title"
+          className="text-3xl font-bold text-gray-800 text-center mb-6"
+        >
           Crie sua Conta
         </h1>
-        <p className="text-center text-gray-500 mb-8">
+        <p id="register-description" className="text-center text-gray-500 mb-8">
           Preencha as informações abaixo para criar sua conta.
         </p>
 
@@ -81,29 +91,33 @@ const Register = () => {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                aria-required="true"
               />
               <Input
                 label="E-mail"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                aria-required="true"
               />
               <Input
                 label="Senha"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                aria-required="true"
               />
               <Input
                 label="Confirmar Senha"
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                aria-required="true"
               />
             </div>
           </div>
 
-          <div className="border-t border-gray-300 my-8"></div>
+          <div className="border-t border-gray-300 my-8" role="separator"></div>
 
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-gray-700 mb-4">
@@ -115,12 +129,14 @@ const Register = () => {
                 type="text"
                 value={cep}
                 onChange={handleCepChange}
+                aria-required="true"
               />
               <Input
                 label="Rua"
                 type="text"
                 value={address.street}
                 onChange={() => {}}
+                aria-required="true"
               />
               <Input
                 label="Número"
@@ -135,18 +151,21 @@ const Register = () => {
                 type="text"
                 value={address.neighborhood}
                 onChange={() => {}}
+                aria-required="true"
               />
               <Input
                 label="Cidade"
                 type="text"
                 value={address.city}
                 onChange={() => {}}
+                aria-required="true"
               />
               <Input
                 label="Estado"
                 type="text"
                 value={address.state}
                 onChange={() => {}}
+                aria-required="true"
               />
             </div>
           </div>
@@ -155,6 +174,7 @@ const Register = () => {
             label="Cadastrar"
             onClick={() => {}}
             className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-md transition duration-300"
+            aria-label="Cadastrar"
           />
         </Form>
 
@@ -162,7 +182,8 @@ const Register = () => {
           Já possui uma conta?{" "}
           <a
             href="/login"
-            className="text-blue-500 hover:text-blue-700 underline"
+            className="text-blue-500 hover:text-blue-700 underline focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+            aria-label="Entrar na conta"
           >
             Entrar
           </a>
