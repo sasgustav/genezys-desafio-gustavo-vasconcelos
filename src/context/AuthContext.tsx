@@ -1,8 +1,9 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
+import { toast } from "react-hot-toast";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
-  login: (email: string, password: string) => void;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
 }
 
@@ -13,18 +14,21 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const login = (email: string, password: string) => {
-    // Atualizamos as credenciais de teste
-    if (email === "teste-gustavo-vasconcelos@investimentos.com" && password === "123456") {
+  const login = async (email: string, password: string): Promise<boolean> => {
+    if (
+      email === "teste-gustavo-vasconcelos@investimentos.com" &&
+      password === "123456"
+    ) {
       setIsAuthenticated(true);
-      alert("Login bem-sucedido!"); // Alerta para indicar que o login foi bem-sucedido (pode ser substituído por redirecionamento)
+      return true;
     } else {
-      alert("Credenciais inválidas");
+      return false;
     }
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    toast("Você foi desconectado.", { icon: "👋" });
   };
 
   return (

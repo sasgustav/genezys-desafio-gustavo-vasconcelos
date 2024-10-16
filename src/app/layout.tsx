@@ -5,8 +5,8 @@ import NavBar from "@/components/NavBar";
 import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 import { usePathname } from "next/navigation";
+import { Toaster } from "react-hot-toast";
 
-// Definimos o layout principal
 export default function RootLayout({
   children,
 }: {
@@ -22,10 +22,11 @@ export default function RootLayout({
       </head>
       <body>
         <AuthProvider>
-          {pathname !== "/reset-password" && pathname !== "/login" && <NavBar />}
-          <div>
-            {children}
-          </div>
+          <Toaster position="top-right" reverseOrder={false} />{" "}
+          {pathname !== "/reset-password" && pathname !== "/login" && (
+            <NavBar />
+          )}
+          <div>{children}</div>
         </AuthProvider>
       </body>
     </html>
