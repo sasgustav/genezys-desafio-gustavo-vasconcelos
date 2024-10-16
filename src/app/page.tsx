@@ -17,9 +17,9 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-700 text-white flex items-center justify-center">
-      <div className="max-w-4xl w-full bg-white text-gray-800 shadow-lg rounded-lg p-8 border border-gray-300">
-        <h1 className="text-3xl font-bold text-center mb-8">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-700 text-white flex items-start justify-center py-10">
+      <div className="max-w-4xl w-full bg-white text-gray-800 shadow-lg rounded-lg p-6 border border-gray-300">
+        <h1 className="text-3xl font-bold text-center mb-6">
           Lista de Usuários
         </h1>
         <table className="w-full table-auto border-collapse overflow-hidden rounded-lg">

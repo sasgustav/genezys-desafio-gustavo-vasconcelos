@@ -27,7 +27,7 @@ export default function RootLayout({
           {pathname !== "/reset-password" && pathname !== "/login" && pathname !== "/register" && (
             <NavBar />
           )}
-          <div>{children}</div>
+          <main className="flex-grow">{children}</main>
           <Footer />
         </AuthProvider>
       </body>
