@@ -12,7 +12,8 @@ const NavBar: React.FC = () => {
     <nav className="bg-gradient-to-r from-blue-800 via-blue-600 to-blue-500 p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-white text-2xl font-bold">
-          <Link href="/">Gustavo - Teste Frontend</Link>
+          <Link href="/">Gustavo Vasconcelos</Link>
+          <p className="text-white font-normal ">Teste Frontend</p>
         </div>
         <ul className="hidden md:flex space-x-8">
           <NavItem href="/" label="Home" />
