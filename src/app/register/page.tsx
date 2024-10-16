@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Form from "@/components/Form";
 import { toast } from "react-hot-toast";
+import { fetchAddressByCep } from "@/services/cepService";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -25,16 +26,19 @@ const Register = () => {
 
     if (value.length === 8) {
       try {
-        const response = await fetch(`https://viacep.com.br/ws/${value}/json/`);
-        const data = await response.json();
-        setAddress({
-          street: data.logradouro,
-          neighborhood: data.bairro,
-          city: data.localidade,
-          state: data.uf,
-        });
-      } catch {
-        toast.error("CEP inválido. Por favor, tente novamente.");
+        const addressData = await fetchAddressByCep(value);
+        if (addressData) {
+          setAddress(addressData);
+        } else {
+          toast.error("Endereço não encontrado.");
+        }
+        toast.success("Endereço encontrado com sucesso!");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        } else {
+          toast.error("An unknown error occurred.");
+        }
       }
     }
   };
