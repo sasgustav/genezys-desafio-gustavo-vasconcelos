@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Form from "@/components/Form";
+import { toast } from "react-hot-toast";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -12,9 +13,13 @@ const ResetPassword = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
+    toast.success(`Link de recuperação enviado para ${email}`, {
+      icon: "📧",
+    });
+
     setTimeout(() => {
-      alert(`Link de recuperação enviado para ${email}`);
-    }, 500);
+      window.location.href = "/login";
+    }, 3000);
   };
 
   return (
