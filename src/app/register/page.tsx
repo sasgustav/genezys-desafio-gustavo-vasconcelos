@@ -18,6 +18,7 @@ const Register = () => {
     neighborhood: "",
     city: "",
     state: "",
+    number: "",
   });
 
   const handleCepChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,11 +29,15 @@ const Register = () => {
       try {
         const addressData = await fetchAddressByCep(value);
         if (addressData) {
-          setAddress(addressData);
+          setAddress((prev) => ({
+            ...prev,
+            ...addressData,
+            number: "",
+          }));
+          toast.success("Endereço encontrado com sucesso!");
         } else {
           toast.error("Endereço não encontrado.");
         }
-        toast.success("Endereço encontrado com sucesso!");
       } catch (error: unknown) {
         if (error instanceof Error) {
           toast.error(error.message);
@@ -108,6 +113,14 @@ const Register = () => {
                 onChange={() => {}}
               />
             </div>
+            <Input
+              label="Número"
+              type="text"
+              value={address.number}
+              onChange={(e) =>
+                setAddress((prev) => ({ ...prev, number: e.target.value }))
+              }
+            />
             <Input
               label="Bairro"
               type="text"
