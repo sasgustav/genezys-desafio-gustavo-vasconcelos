@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="text-center md:text-left">
             <p className="text-lg font-semibold">
-              Desenvolvido por Gustavo Vasconcelos
+              Desenvolvido por Gustavo Vasconcelos - Genezys App
             </p>
             <p className="text-sm text-gray-400 mt-2">
               Este projeto foi criado para demonstrar habilidades técnicas em

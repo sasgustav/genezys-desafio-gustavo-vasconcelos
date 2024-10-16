@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Form from "@/components/Form";
-import { toast } from "react-hot-toast"; // Importa o toast
+import { toast } from "react-hot-toast";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -48,7 +48,6 @@ const Register = () => {
 
     toast.success("Cadastro realizado com sucesso!");
 
-    // Simula redirecionamento após 2 segundos
     setTimeout(() => {
       window.location.href = "/login";
     }, 2000);
