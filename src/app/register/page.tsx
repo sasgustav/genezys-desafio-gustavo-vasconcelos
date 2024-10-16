@@ -44,7 +44,6 @@ const Register = () => {
       alert("As senhas não coincidem");
       return;
     }
-    // Lógica de envio dos dados de cadastro para a API
   };
 
   return (

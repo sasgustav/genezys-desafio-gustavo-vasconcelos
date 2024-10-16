@@ -12,7 +12,6 @@ const Home = () => {
       email: "maria@gmail.com",
       address: "Rua X, Bairro Y, Cidade Z",
     },
-    // Simulação de mais usuários
   ];
 
   return (
