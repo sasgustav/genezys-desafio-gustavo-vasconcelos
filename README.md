@@ -1,4 +1,4 @@
-# **Projeto: Cadastro e Login - Genezys App**
+# **Projeto: Cadastro e Login - Genezys App - Gustavo Vasconcelos**
 
 Este é um projeto desenvolvido com **Next.js** e **Tailwind CSS**, focado na criação de um sistema de **cadastro e login** com validação de **CEP** e organização de **dados do usuário e endereço**. Utilizamos **Firebase** para autenticação e gerenciamento de estados com **Context API**. Além disso, o projeto é responsivo e otimizado para fornecer uma excelente experiência ao usuário.
 
